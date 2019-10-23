@@ -66,6 +66,11 @@ internal class SuperBottomSheetDialog : AppCompatDialog {
         mCancelable = cancelable
     }
 
+    override fun onBackPressed() {
+        behavior.state = BottomSheetBehavior.STATE_HIDDEN
+        //super.onBackPressed()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -142,7 +147,8 @@ internal class SuperBottomSheetDialog : AppCompatDialog {
         // We treat the CoordinatorLayout as outside the dialog though it is technically inside
         coordinator.findViewById<View>(R.id.touch_outside).setOnClickListener {
             if (mCancelable && isShowing && shouldWindowCloseOnTouchOutside()) {
-                cancel()
+                behavior.state = BottomSheetBehavior.STATE_HIDDEN
+                //cancel()
             }
         }
 
